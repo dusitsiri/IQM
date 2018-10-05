@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="525.0" prefWidth="443.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DateDiffController">
+
+    <children>
+      <Label layoutX="72.0" layoutY="82.0" text="Choose 1st date" />
+      <Label layoutX="72.0" layoutY="202.0" text="Choose 2nd date" />
+      <DatePicker fx:id="firstDatePicker" layoutX="72.0" layoutY="130.0" prefHeight="31.0" prefWidth="180.0" />
+      <DatePicker fx:id="secondDatePicker" layoutX="72.0" layoutY="246.0" prefHeight="31.0" prefWidth="180.0" />
+      <Button fx:id="dateDiffButton" layoutX="288.0" layoutY="462.0" mnemonicParsing="false" onAction="#handle_DateDiff_Button" prefHeight="31.0" prefWidth="107.0" text="DATEDIFF" />
+      <Label fx:id="chooseDatesDiffLabel" layoutX="72.0" layoutY="325.0" />
+      <Label fx:id="answerDateDiffLabel" layoutX="72.0" layoutY="441.0" prefHeight="21.0" prefWidth="107.0" />
+    </children>
+
+</AnchorPane>
