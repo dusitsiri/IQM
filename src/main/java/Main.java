@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class Main extends Application{
 
+    //this class execute database.fxml, DatabaseController, DBOrderListConnection
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/database.fxml"));

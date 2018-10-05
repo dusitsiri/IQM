@@ -2,15 +2,11 @@ package databases;
 
 import java.sql.*;
 
-public class MySQLConnection {
+public class MySQLConnection {  //ติดต่อฐานข้อมูล MySQL
     private static final String URL="jdbc:mysql://localhost:3306/productdate";
     private static final String USER ="root";
     private static final String PASSWORD="root";
     private Connection connection;
-
-    public Connection getConnection() {
-        return connection;
-    }
 
     public Connection connect(){
         try {
@@ -49,6 +45,7 @@ public class MySQLConnection {
     public int dateDiff(String date1, String date2) {
         int computeDateDiff = 0;
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             connection= DriverManager.getConnection(URL,USER,PASSWORD);
             if (connection != null) {
                 String query = "SELECT DATEDIFF(\'"+ date1 + "\', \'"+ date2 +"\')";
@@ -61,6 +58,8 @@ public class MySQLConnection {
                 resultSet.close();
                 connection.close();
             }
+        } catch (ClassNotFoundException e){
+            System.err.println("Finding class error");
         } catch (SQLException e) {
             System.err.println("Please connect to MySQL server before execute program");
         }

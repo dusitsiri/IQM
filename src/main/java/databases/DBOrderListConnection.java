@@ -10,11 +10,13 @@ import models.OrderListInTableView;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DBOrderListConnection {
+public class DBOrderListConnection {    //ติดต่อฐานข้อมูล OrderList.db
+
+    private static final String dbURL = "jdbc:sqlite:OrderList.db";
+
     public int getCreateID() {
         try {
             Class.forName("org.sqlite.JDBC");
-            String dbURL = "jdbc:sqlite:OrderList.db";
             Connection connection = DriverManager.getConnection(dbURL);
             if (connection != null) {
                 String query = "Select max(id) from OrderList";
@@ -34,7 +36,6 @@ public class DBOrderListConnection {
         ObservableList<OrderListInTableView> menu = FXCollections.observableArrayList();
         try {
             Class.forName("org.sqlite.JDBC");
-            String dbURL = "jdbc:sqlite:OrderList.db";
             Connection conn = DriverManager.getConnection(dbURL);
             if (conn != null) {
                 String query = "select * from OrderList";
@@ -60,11 +61,9 @@ public class DBOrderListConnection {
         return menu;
     }
 
-
     public void saveDB(int id, int date, double price, int qty, double totalPrice) {
         try {
             Class.forName("org.sqlite.JDBC");
-            String dbURL = "jdbc:sqlite:OrderList.db";
             Connection  connection = DriverManager.getConnection(dbURL);
             if (connection != null) {
                 String query = "insert into OrderList(id, date, price, qty, totalPrice) values (\'" + id + "\', \'" + date + "\', \'" + price + "\', \'" + qty + "\', \'" + totalPrice + "')";
@@ -76,11 +75,11 @@ public class DBOrderListConnection {
             e.printStackTrace();
         }
     }
+
     public ObservableList showFiveOrderList() {
         ObservableList<OrderListInTableView> menu = FXCollections.observableArrayList();
         try {
             Class.forName("org.sqlite.JDBC");
-            String dbURL = "jdbc:sqlite:OrderList.db";
             Connection connection = DriverManager.getConnection(dbURL);
             if (connection != null) {
                 String query = "SELECT * FROM OrderList ORDER BY date DESC LIMIT 5";
@@ -104,10 +103,10 @@ public class DBOrderListConnection {
         }
         return menu;
     }
+
     public void editDB(int id, int date, double price, int qty, double totalPrice) {
         try {
             Class.forName("org.sqlite.JDBC");
-            String dbURL = "jdbc:sqlite:OrderList.db";
             Connection connection = DriverManager.getConnection(dbURL);
             if (connection != null) {
                 String query = "update OrderList set id=\'" + id + "\' ,date=\'" + date + "\' ,price=\'" + price + "\' ,qty=\'" + qty + "\' , totalPrice=\'"+totalPrice+"\' where date == \'" + date + "\'";
@@ -122,11 +121,11 @@ public class DBOrderListConnection {
             e.printStackTrace();
         }
     }
+
     public void deleteDB(int date) {
         try {
             System.err.println("Delete date: " + date);
             Class.forName("org.sqlite.JDBC");
-            String dbURL = "jdbc:sqlite:OrderList.db";
             Connection connection = DriverManager.getConnection(dbURL);
             if (connection != null) {
                 String query = "Delete from OrderList where date == \'" + date + "\' ";
@@ -138,7 +137,4 @@ public class DBOrderListConnection {
             e.printStackTrace();
         }
     }
-
-
-
 }

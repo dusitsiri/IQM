@@ -1,6 +1,6 @@
 package models;
 
-public class OrderList {
+public class OrderList {     //Class นี้ date จะเป็น int
     private int id;
     private int date;
     private double price;

@@ -6,33 +6,34 @@ import models.OrderListInTableView;
 
 import java.sql.*;
 
-public class DBNewDateConnection {
-    private Connection conn=null;
+public class DBNewDateConnection {  //ติดต่อฐานข้อมูล Newdate.db
+
+    private Connection connection=null;
     private static String url="jdbc:sqlite:C:/Users/Admin/Documents/IQM2/IQMPatch3/Newdate.db";
+
     public Connection connect(){
         try {
-            conn= DriverManager.getConnection(url);
-            if(!conn.isClosed()){
+            connection= DriverManager.getConnection(url);
+            if(!connection.isClosed()){
                 System.out.println();
                 System.out.println("Connection to SQLite");
             }else{
                 System.out.println("Cannot Connection to SQLite");
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return conn;
+        return connection;
     }
 
     public ObservableList<OrderListInTableView> loadDate(){
         ObservableList<OrderListInTableView> dates = FXCollections.observableArrayList();
         OrderListInTableView orderListInTableView = null;
         try{
-            conn = DriverManager.getConnection(url);
-            if (conn != null){
+            connection = DriverManager.getConnection(url);
+            if (connection != null){
                 String query = "select * from newdate";
-                Statement statement = conn.createStatement();
+                Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()){
                     orderListInTableView = new OrderListInTableView();
@@ -51,13 +52,13 @@ public class DBNewDateConnection {
 
     public void saveDate(int id, String date){
         try{
-            conn = DriverManager.getConnection(url);
-            if (conn != null){
+            connection = DriverManager.getConnection(url);
+            if (connection != null){
                 String query = "insert into newdate(id, date) values (?, ?)";
                 //update database by insert new record
-                PreparedStatement p = conn.prepareStatement(query);
+                PreparedStatement p = connection.prepareStatement(query);
                 p.executeUpdate();
-                conn.close();
+                connection.close();
             }
         } catch (SQLException e){
             System.err.println("Connection to database has problem, otherwise insertion.");
@@ -67,16 +68,16 @@ public class DBNewDateConnection {
     public int getMaxId(){
         int maxId = 0;
         try{
-            conn = DriverManager.getConnection(url);
-            if (conn != null){
+            connection = DriverManager.getConnection(url);
+            if (connection != null){
                 String query = "select max(id) from newdate";
                 //pull data in database that row form
-                Statement statement = conn.createStatement();
+                Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
                 maxId = resultSet.getInt("id");
                 resultSet.close();
             }
-            conn.close();
+            connection.close();
         } catch (SQLException e){
             System.err.println("Connection to database has problem, otherwise getMaxId.");
         }

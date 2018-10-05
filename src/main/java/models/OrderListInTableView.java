@@ -1,6 +1,6 @@
 package models;
 
-public class OrderListInTableView {
+public class OrderListInTableView {     //Class นี้ date จะเป็น String
     private int id;
     private String date;
     private double price;
