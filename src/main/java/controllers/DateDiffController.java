@@ -37,9 +37,6 @@ public class DateDiffController {
             @Override
             public void handle(ActionEvent event) {
                 secondDatePicked = secondDatePicker.getValue();
-                if (firstDatePicked != null && secondDatePicked != null) {
-                    chooseDatesDiffLabel.setText("1st date chose:  " + firstDatePicked + "\n2nd date chose: " + secondDatePicked);
-                }
             }
         });
     }
@@ -54,11 +51,12 @@ public class DateDiffController {
                 int datediff = Math.abs(mySQLConnection.dateDiff(String.valueOf(firstDatePicked), String.valueOf(secondDatePicked)));
                 answerDateDiffLabel.setText("Datediff: " + String.valueOf(datediff));
                 System.out.println("DATEDIFF: " + String.valueOf(datediff));
+                chooseDatesDiffLabel.setText("1st date chose:  " + firstDatePicked + "\n2nd date chose: " + secondDatePicked);
+                //reset
+                firstDatePicker.setValue(null);
+                secondDatePicker.setValue(null);
+                firstDatePicker.requestFocus();
             }
-            //reset
-            firstDatePicker.setValue(null);
-            secondDatePicker.setValue(null);
-            firstDatePicker.requestFocus();
         } catch (NullPointerException e){
             System.err.println("Connection is failed");
         }
