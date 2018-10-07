@@ -58,7 +58,7 @@ public class DateDiffController {
                 firstDatePicker.requestFocus();
             }
         } catch (NullPointerException e){
-            System.err.println("Connection is failed");
+            System.err.println("Connection is failed.");
         }
     }
 }
