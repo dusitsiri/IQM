@@ -13,6 +13,7 @@ public class DBNewDateConnection {  //ติดต่อฐานข้อมู
 
     public Connection connect(){
         try {
+            Class.forName("org.sqlite.JDBC");
             connection= DriverManager.getConnection(url);
             if(!connection.isClosed()){
                 System.out.println();
@@ -21,6 +22,8 @@ public class DBNewDateConnection {  //ติดต่อฐานข้อมู
                 System.out.println("Cannot Connection to SQLite");
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return connection;
@@ -52,6 +55,7 @@ public class DBNewDateConnection {  //ติดต่อฐานข้อมู
 
     public void saveDate(int id, String date){
         try{
+            Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection(url);
             if (connection != null){
                 String query = "insert into newdate(id, date) values (?, ?)";
@@ -62,6 +66,8 @@ public class DBNewDateConnection {  //ติดต่อฐานข้อมู
             }
         } catch (SQLException e){
             System.err.println("Connection to database has problem, otherwise insertion.");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

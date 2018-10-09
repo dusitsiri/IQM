@@ -49,7 +49,7 @@ public class MySQLConnection {  //ติดต่อฐานข้อมูล 
             connection= DriverManager.getConnection(URL,USER,PASSWORD);
             if (connection != null) {
                 String query = "SELECT DATEDIFF(\'"+ date1 + "\', \'"+ date2 +"\')";
-                System.out.println("My function: " + query);
+                System.out.println(query);
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()){
