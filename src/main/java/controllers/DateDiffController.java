@@ -9,12 +9,14 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class DateDiffController {
 
     @FXML
-    private Label answerDateDiffLabel, chooseDatesDiffLabel;
+    private Label answerDateDiffLabel, chooseDatesDiffLabel, answerHourDiffLabel, time1Label, time2Label;
 
     @FXML
     private Button dateDiffButton;
@@ -38,6 +40,7 @@ public class DateDiffController {
             public void handle(ActionEvent event) {
                 secondDatePicked = secondDatePicker.getValue();
             }
+
         });
     }
 
@@ -47,11 +50,22 @@ public class DateDiffController {
         Connection connection = mySQLConnection.connect();  //connect to MySQL database
         try {
             if (firstDatePicked != null && secondDatePicked != null && connection != null) {
+
                 //use function DATEDIFF
                 int datediff = Math.abs(mySQLConnection.dateDiff(String.valueOf(firstDatePicked), String.valueOf(secondDatePicked)));
-                answerDateDiffLabel.setText("Datediff: " + String.valueOf(datediff));
+                String time1 = time1Label.getText().substring(0, 5);
+                String time2 = time2Label.getText().substring(0, 5);
+                int hourdiff = Math.abs(mySQLConnection.hourDiff(time1, time2));
+
+                //setText datediff and hourdiff
+                answerDateDiffLabel.setText("DateDiff: " + String.valueOf(datediff));
+                answerHourDiffLabel.setText("HourDiff: " + String.valueOf(hourdiff));
+
+                //show datediff, hourdiff and setText in fxml
                 System.out.println("DATEDIFF: " + String.valueOf(datediff));
+                System.out.println("HOURDIFF: " + String.valueOf(hourdiff));
                 chooseDatesDiffLabel.setText("1st date chose:  " + firstDatePicked + "\n2nd date chose: " + secondDatePicked);
+
                 //reset
                 firstDatePicker.setValue(null);
                 secondDatePicker.setValue(null);

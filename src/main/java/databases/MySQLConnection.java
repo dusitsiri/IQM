@@ -3,7 +3,7 @@ package databases;
 import java.sql.*;
 
 public class MySQLConnection {  //ติดต่อฐานข้อมูล MySQL
-    private static final String URL="jdbc:mysql://localhost:3306/productdate";
+    private static final String URL="jdbc:mysql://localhost:3307/productdate";
     private static final String USER ="root";
     private static final String PASSWORD="root";
     private Connection connection;
@@ -64,5 +64,28 @@ public class MySQLConnection {  //ติดต่อฐานข้อมูล 
             System.err.println("Please connect to MySQL server before execute program");
         }
         return computeDateDiff;
+    }
+    public int hourDiff(String time1, String time2) {
+        int hourDiff = 0;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection= DriverManager.getConnection(URL,USER,PASSWORD);
+            if (connection != null) {
+                String query = "SELECT TIMEDIFF(\'"+ time1 + "\', \'"+ time2 +"\')";
+                System.out.println(query);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()){
+                    hourDiff = resultSet.getInt(1);
+                }
+                resultSet.close();
+                connection.close();
+            }
+        } catch (ClassNotFoundException e){
+            System.err.println("Finding class error");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return hourDiff;
     }
 }

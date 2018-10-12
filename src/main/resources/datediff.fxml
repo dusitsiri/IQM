@@ -15,6 +15,9 @@
       <Button fx:id="dateDiffButton" layoutX="288.0" layoutY="462.0" mnemonicParsing="false" onAction="#handle_DateDiff_Button" prefHeight="31.0" prefWidth="107.0" text="DATEDIFF" />
       <Label fx:id="chooseDatesDiffLabel" layoutX="72.0" layoutY="325.0" />
       <Label fx:id="answerDateDiffLabel" layoutX="72.0" layoutY="441.0" prefHeight="21.0" prefWidth="107.0" />
+      <Label fx:id="answerHourDiffLabel" layoutX="72.0" layoutY="478.0" prefHeight="21.0" prefWidth="107.0" />
+      <Label fx:id="time1Label" layoutX="324.0" layoutY="135.0" text="07:10 AM" />
+      <Label fx:id="time2Label" layoutX="324.0" layoutY="252.0" text="10:00 AM" />
     </children>
 
 </AnchorPane>
